@@ -4,10 +4,10 @@ import fileinput
 import zipfile
 import argparse
 from bids import BIDSLayout
+from config import validate_study_info
 
 import json
 from datetime import datetime
-
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 NII_TEMPLATE_DIR = os.path.join(BASE_DIR, "nii_template")
@@ -21,9 +21,9 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
     pi_email = study_info["pi_email"]
     lab_email = study_info["lab_email"]
 
-
     if not isinstance(scan_date, str):
         scan_date = scan_date.isoformat()
+
     if not isinstance(create_date, str):
         create_date = create_date.isoformat()
 
@@ -38,14 +38,13 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
             subject=subject_id,
             session=session_id,
         )
-    print(t1w_imgs)
     t1w_jsons = layout.get(
         extension="json",
         suffix="T1w",
         subject=subject_id,
         session=session_id,
     )
-    print(t1w_jsons)
+
     if not t1w_imgs:
         raise FileNotFoundError(f"No T1w images found for sub-{subject_id}, ses-{session_id}")
     if not t1w_jsons:
@@ -77,9 +76,8 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
     shutil.copy2(t1w, output_nii_path)
     shutil.copy2(t1w_json, output_json_path)
 
-    
     # Update README
-    readme_path = os.path.join(OUT_DIR, "README.txt")
+    readme_path = os.path.join(OUT_DIR, "README.md")
     with fileinput.FileInput(readme_path, inplace=True) as file:
         for line in file:
             line = line.replace("rep_create_date", create_date)
@@ -107,35 +105,32 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
 
 def valid_date(date_str):
     try:
-        return datetime.strptime(date_str, "%Y-%m-%d").date()
+        return datetime.strptime(date_str, "%Y%m%d").date()
     except ValueError:
-        raise argparse.ArgumentTypeError(f"Invalid date format: '{date_str}'. Expected YYYY-MM-DD.")
+        raise argparse.ArgumentTypeError(f"Invalid date format: '{date_str}'. Expected YYYYMMDD.")
     
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(description="Collect and package subject data from BIDS")
-    parser.add_argument('bids_dir', help='Study bids directory (e.g., /archive/data/PSIBD/data/bids)')
-    parser.add_argument('study_id', help='Study ID(e.g., PSIBD)')
+    parser.add_argument('bids_dir', help='Study BIDS directory (e.g., /archive/data/PSIBD/data/bids)')
+    parser.add_argument('study_id', help='Study ID code(e.g., PSIBD)')
     parser.add_argument('--subject_id', metavar='SUBJECT', required=True, help='BIDS Subject ID (e.g., CMH0004)')
     parser.add_argument('--session_id', metavar='SESSION', required=True, help='BIDS Session ID (e.g., 01)')
-    parser.add_argument('--scan_date', metavar='DATE', required=True, type=valid_date, help='Scan date (e.g., 2025-06-01)')
-    parser.add_argument('--create_date', metavar='DATE', required=True, type=valid_date, help='Create date (e.g., 2025-07-14)')
+    parser.add_argument('--scan_date', metavar='DATE', required=True, type=valid_date, help='Scan date (e.g., 20250601)')
 
     args = parser.parse_args()
     # Load study_info JSON dynamically
     study_info_path = os.path.join(BASE_DIR, "study_info", f"{args.study_id}.json")
-    if not os.path.exists(study_info_path):
-        raise FileNotFoundError(f"Study info not found at: {study_info_path}")
-    
-    with open(study_info_path, "r") as f:
-        study_info = json.load(f)
-    
+    study_info = validate_study_info(study_info_path)
+    current_datetime = datetime.now()
+    create_date = current_datetime.strftime("%Y-%m-%d")
+
     # Run main function
     collect_subject_data(
         bids_dir=args.bids_dir,
         subject_id=args.subject_id,
         session_id=args.session_id,
         scan_date=args.scan_date,
-        create_date=args.create_date,
+        create_date=create_date,
         study_info=study_info
     )
