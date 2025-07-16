@@ -23,7 +23,9 @@ To view NIfTI files using the included local viewer:
 
 4. To load a different image, first go to **File → Close All**, then repeat step 2.
 
-All image headers have been cleaned but images have NOT been de-faced.
+Notes
+- A screenshot of the viewer interface is located in `images/image1.png`. Open it separately if needed.
+- All image headers have been cleaned but images have NOT been de-faced.
 
 PIs contact: 
 rep_pi_email
