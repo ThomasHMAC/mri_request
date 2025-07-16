@@ -83,7 +83,11 @@ After running the script, you’ll find:
 
  - A .zip archive in the zips/ directory containing the selected T1w image(s)
 
- - The zip file is viewable using the included HTML file (local_viewer.html)
+ - This zip file is intended to be sent to the **requester**.
+
+ - Inside the archive, there is a README.md file with instructions on how to view the image using the included HTML viewer (local_viewer.html), which can be opened in a web browser.
+
+ - ⚠️ Reminder: The requester must unzip the archive before opening local_viewer.html, or the viewer will not work properly.
 
 ### 📁 Example Directory Structure
 ```bash

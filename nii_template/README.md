@@ -1,5 +1,7 @@
 This zip was created on rep_create_date.
 
+⚠️ Reminder: must unzip the archive before opening local_viewer.html
+
 It contains data collected as part of the 'rep_study_name' at CAMH (PI: rep_pi_name).
 We have included NIfTI (.nii.gz) files for T1, for an MRI conducted at CAMH on rep_scan_date.
 
