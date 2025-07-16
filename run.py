@@ -26,7 +26,7 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
 
     if not isinstance(create_date, str):
         create_date = create_date.isoformat()
-    print(subject_id, bids_dir)
+
     ignore_regex = f'(?!sub-{subject_id}).*'
     indexer = BIDSLayoutIndexer(ignore=[ignore_regex])
     layout = BIDSLayout(
@@ -34,9 +34,7 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
             validate=False,
             indexer=indexer
             # ignore=[f'(?!sub-{subject_id}).*']
-        )
-    print(f"subject_id: {subject_id}")
-    print(f"ignore regex: {(f'(?!sub-{subject_id}).*')}")   
+        )   
     print(layout)
     t1w_imgs = layout.get(
             extension="nii.gz",
