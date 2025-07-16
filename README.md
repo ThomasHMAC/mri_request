@@ -29,14 +29,23 @@ Fill in the relevant study information:
 
 ```json
 {
-    "study_id": "STUDY_ID",           // Your project ID
-    "study_name": "STUDY NAME",       // Short description of the study
-    "pi_name": "PI NAME",             // Principal Investigator's full name
-    "pi_email": "PI EMAIL",           // PI's email address
-    "lab_email": "LAB EMAIL"          // RA or lab contact email
+    "study_id": "STUDY_ID",           
+    "study_name": "STUDY NAME",       
+    "pi_name": "PI NAME",             
+    "pi_email": "PI EMAIL",           
+    "lab_email": "LAB EMAIL"          
 }
-
 ```
+
+#### Key	Description:
+| Parameter | Description |
+|-----------|-------------|
+|`study_id`|	Your project ID
+|`study_name`|	Short description of the study
+|`pi_name`|	Principal Investigator's full name
+|`pi_email`|	PI's email address
+|`lab_email`|	RA or lab contact email
+
 Example:
 
 ```json
@@ -78,14 +87,22 @@ After running the script, you’ll find:
 ### 📁 Example Directory Structure
 ```bash
 mri_request/
-    ├── patient_mri_request.py
-    ├── study_info/
-    │   └── study_info.json
-    ├── nii_template/
+    ├── config.py
+    ├── nii_template
+    │   ├── data
+    │   ├── images
     │   ├── local_viewer.html
-    │   ├── static/
-    │   └── README.md
-    │   └── images/
-    ├── zips/
-    │   └── TEST_CMH0001_01.zip
+    │   ├── README.md
+    │   └── static
+    ├── README.md
+    ├── run.py
+    ├── study_info
+    │   ├── ASCEND.json
+    │   └── PSIBD.json
+    ├── transfer_file
+    │   ├── ASCEND_CMH0045_01
+    │   └── PSIBD_CMH0004_01
+    └── zips
+        ├── ASCEND_CMH0045_01.zip
+        └── PSIBD_CMH0004_01.zip
 ```
