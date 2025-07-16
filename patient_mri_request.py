@@ -3,7 +3,7 @@ import shutil
 import fileinput
 import zipfile
 import argparse
-from bids import BIDSLayout
+from bids import BIDSLayout, BIDSLayoutIndexer
 from config import validate_study_info
 
 import json
@@ -26,12 +26,18 @@ def collect_subject_data(bids_dir, subject_id, session_id, scan_date, create_dat
 
     if not isinstance(create_date, str):
         create_date = create_date.isoformat()
-
+    print(subject_id, bids_dir)
+    ignore_regex = f'(?!sub-{subject_id}).*'
+    indexer = BIDSLayoutIndexer(ignore=[ignore_regex])
     layout = BIDSLayout(
             bids_dir,
             validate=False,
-            ignore=[f'(?!sub-{subject_id}).*']
+            indexer=indexer
+            # ignore=[f'(?!sub-{subject_id}).*']
         )
+    print(f"subject_id: {subject_id}")
+    print(f"ignore regex: {(f'(?!sub-{subject_id}).*')}")   
+    print(layout)
     t1w_imgs = layout.get(
             extension="nii.gz",
             suffix="T1w",

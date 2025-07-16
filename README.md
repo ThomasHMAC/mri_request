@@ -6,10 +6,9 @@ This module collects participant T1-weighted (T1w) MRI scans from a BIDS-complia
 
 ## 🚀 Quick Start
 
-### 📦 Software Requirements
-
-- Python **3.8** or higher
-
+### Python Dependencies
+- Python **3.10** or higher with the following packages:
+    - pybids==0.15.2   
 ### 📁 Required Inputs
 
 - A BIDS-formatted dataset
@@ -18,6 +17,11 @@ This module collects participant T1-weighted (T1w) MRI scans from a BIDS-complia
 ---
 
 ## 📝 Step-by-Step Instructions
+
+### Step 0: Create python virtual environment and install package
+python -m venv virtual_env 
+source virtual_env/bin/activate 
+pip install pybids=0.15.2
 
 ### Step 1: Edit the `study_info.json` File
 
