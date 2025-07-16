@@ -19,32 +19,32 @@ This module collects participant T1-weighted (T1w) MRI scans from a BIDS-complia
 ## 📝 Step-by-Step Instructions
 
 ### Step 0: Create python virtual environment and install package
-python -m venv virtual_env 
-source virtual_env/bin/activate 
-pip install pybids=0.15.2
+python -m venv mri_request_env 
+source mri_request_env/bin/activate 
+pip install pybids==0.15.2
 
 ### Step 1: Edit the `study_info.json` File
 
-Fill in the relevant study information:
+Create and fill out your study_info.json file with the study metadata:
 
 ```json
 {
-    "study_id": "STUDY_ID",           
-    "study_name": "STUDY NAME",       
-    "pi_name": "PI NAME",             
-    "pi_email": "PI EMAIL",           
-    "lab_email": "LAB EMAIL"          
+  "study_id": "STUDY_ID",
+  "study_name": "STUDY NAME",
+  "pi_name": "PI NAME",
+  "pi_email": "PI EMAIL",
+  "lab_email": "LAB EMAIL"
 }
 ```
 
 #### Key	Description:
-| Parameter | Description |
-|-----------|-------------|
-|`study_id`|	Your project ID
-|`study_name`|	Short description of the study
-|`pi_name`|	Principal Investigator's full name
-|`pi_email`|	PI's email address
-|`lab_email`|	RA or lab contact email
+| Parameter     | Description                                        |
+|---------------|----------------------------------------------------|
+| `study_id`    | Your project ID.                                   |
+| `study_name`  | Short description of the study.                    |
+| `pi_name`     | Principal Investigator's full name.                |
+| `pi_email`    | PI's email address.                                |
+| `lab_email`   | RA or lab contact email address.   |
 
 Example:
 
@@ -61,15 +61,16 @@ Example:
 ### Step 2: Run the main script
 Run the script using the following command:
 ```bash
-python patient_mri_request.py [BIDS_DIR] [STUDY_ID] \
-       --subject_id [SUBJECT_ID] \
-       --session_id [SESSION_ID] \
-       --scan_date [YYYYMMDD] \
-       --create_date [YYYYMMDD]
+python run.py <BIDS_DIR> <STUDY_ID> \
+       --subject_id <SUBJECT_ID> \
+       --session_id <SESSION_ID> \
+       --scan_date <YYYYMMDD> \
+       --create_date <YYYYMMDD>
+
 ```
 **Example**:
 ```bash
-python patient_mri_request.py /archive/data/PSIOCD/data/bids PSIOCD \
+python run.py /archive/data/PSIOCD/data/bids PSIOCD \
        --subject_id CMH0001 \
        --session_id 01 \
        --scan_date 20250601 \
