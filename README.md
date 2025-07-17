@@ -19,10 +19,11 @@ This module collects participant T1-weighted (T1w) MRI scans from a BIDS-complia
 ## 📝 Step-by-Step Instructions
 
 ### Step 0: Create python virtual environment and install package
+```bash
 python -m venv mri_request_env 
 source mri_request_env/bin/activate 
 pip install pybids==0.15.2
-
+```
 ### Step 1: Edit the `study_info.json` File
 
 Create and fill out your study_info.json file with the study metadata:
