@@ -26,7 +26,9 @@ pip install pybids==0.15.2
 ```
 ### Step 1: Edit the `study_info.json` File
 
-Create and fill out your study_info.json file with the study metadata:
+Create a JSON file named after your **study ID** inside the `study_info/` folder (e.g., `PSIBD.json`, `ASCEND.json`).
+
+Fill it with the following metadata:
 
 ```json
 {
