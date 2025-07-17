@@ -67,7 +67,7 @@ Run the script using the following command:
 python run.py <BIDS_DIR> <STUDY_ID> \
        --subject_id <SUBJECT_ID> \
        --session_id <SESSION_ID> \
-       --scan_date <YYYYMMDD> \
+       --scan_date <YYYYMMDD>
 
 ```
 **Example**:
@@ -75,7 +75,7 @@ python run.py <BIDS_DIR> <STUDY_ID> \
 python run.py /archive/data/PSIOCD/data/bids PSIOCD \
        --subject_id CMH0001 \
        --session_id 01 \
-       --scan_date 20250601 \
+       --scan_date 20250601
 ```
 
 ## 📊 Output Files
