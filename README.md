@@ -8,7 +8,7 @@ This module collects participant T1-weighted (T1w) MRI scans from a BIDS-complia
 
 ### Python Dependencies
 - Python **3.10** or higher with the following packages:
-    - pybids==0.15.2   
+    - pybids==0.15.6   
 ### 📁 Required Inputs
 
 - A BIDS-formatted dataset
