@@ -21,6 +21,10 @@ To view NIfTI files using the included local viewer:
 
 ![](./images/image3.png)
 
+**TIPS**: Once the image is loaded, you can adjust the brightness by moving the scale bar left or right. This control is found under the second icon from the top right. Refer to image4.png in the images/ folder for more details.
+
+![](./images/image4.png)
+
 4. To load a different image, first go to **File → Close All**, then repeat step 2.
 
 Notes
